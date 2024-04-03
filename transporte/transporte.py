@@ -104,7 +104,7 @@ def alternar_estado_rota():
 
 def editar_rota():
 
-    ''' Essa função é responsável por editar qualquer rota'''
+    ''' Essa função é responsável por editar qualquer rota e os seus bairros'''
 
     exibir_subtitulo('Editando as rotas')
     nome_rota = input('Digite o nome da rota que deseja editar: ')
