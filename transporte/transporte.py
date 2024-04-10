@@ -1,8 +1,8 @@
 import os
  
-rotas = [{'nome':'Rota 1', 'bairro':'Alvorada, Bairro da Paz, Redenção', 'ativo':False},
-         {'nome':'Rota 2', 'bairro':'Compensa, Nova Esperança, Planalto', 'ativo':True},
-         {'nome':'Rota 3', 'bairro':'Coroado, Mauazinho, Novo Aleixo', 'ativo':False }]
+rotas = [{'nome':'Rota 1', 'bairro':'Alvorada, Bairro da Paz, Redenção', 'modalidade':'W8', 'fornecedor':'Transsilvestre', 'ativo':False},
+         {'nome':'Rota 2', 'bairro':'Compensa, Nova Esperança, Planalto', 'modalidade':'V8', 'fornecedor':'Transsilvestre', 'ativo':True},
+         {'nome':'Rota 3', 'bairro':'Coroado, Mauazinho, Novo Aleixo', 'modalidade':'VAN', 'fornecedor':'Transsilvestre', 'ativo':False }]
 
 
 def exibir_nome_do_programa():
@@ -61,10 +61,52 @@ def cadastrar_nova_rota():
     '''
     exibir_subtitulo('Cadastro de novas Rotas')
     nome_da_rota = input('Digite o nome da rota que deseja cadastrar: ')
-    bairro = input(f'Digite os bairros que sua rota vai passar: ')
-    dados_da_rota = {'nome':nome_da_rota,'bairro':bairro, 'ativo':False}
-    rotas.append(dados_da_rota)
-    print(f'A rota {nome_da_rota} foi cadastrado com sucesso!')
+    bairro = input('Digite os bairros que sua rota vai passar: ')
+    modalidade = int(input('Digite a modalidade do transporte: (1) VAN, (2) V8, (3) W8, (4) ÔNIBUS e (5) CARRO: '))
+
+    rota = {}  # Criando um novo dicionário para cada rota
+    
+    if modalidade == 1:
+        rota['modalidade'] = 'VAN'
+
+    elif modalidade == 2:
+        rota['modalidade'] = 'V8'
+
+    elif modalidade == 3:
+        rota['modalidade'] = 'W8'
+
+    elif modalidade == 4:
+        rota['modalidade'] = 'ÔNIBUS'
+
+    elif modalidade == 5:
+        rota['modalidade'] = 'CARRO'
+
+    else:
+        print('Item inválido!')
+
+    fornecedor = int(input('Digite o fornecedor do transporte: (1) ZENATUR, (2) TRANSSILVESTRE e (3) TRANSMEGA: '))
+
+    if fornecedor == 1:
+        rota['fornecedor'] = 'Zenatur'
+        print('Zenatur cadastrado!')
+
+    elif fornecedor == 2:
+        rota['fornecedor'] = 'Transsilvestre'
+        print('Transsilvestre cadastrado!')
+
+    elif fornecedor == 3:
+        rota['fornecedor'] = 'Transmega'
+        print('Transmega cadastrado!')
+
+    else:
+        print('Item inválido!')
+
+    rota['nome'] = nome_da_rota
+    rota['bairro'] = bairro
+    rota['ativo'] = False
+
+    rotas.append(rota)
+    print(f'A {nome_da_rota} foi cadastrado com sucesso!')
     
     voltar_ao_menu_principal()
  
@@ -73,12 +115,14 @@ def listar_rotas():
 
     ''' Essa função é para organizar as listas de rotas'''
 
-    print(f"{'Nome da rota'.ljust(18)} | {'Bairro'.ljust(40)} | Status")
+    print(f"{'Nome da rota'.ljust(18)} | {'Bairro'.ljust(40)} | {'Modalidade'.ljust(20)} | {'Fornecedor'.ljust(20)} | Status")
     for rota in rotas:
         nome_rota = rota['nome']
         bairro = rota['bairro']
+        modalidade = rota['modalidade']
+        fornecedor = rota['fornecedor']
         ativo = 'ativado' if rota['ativo'] else 'desativado'
-        print(f'- {nome_rota.ljust(16)} | {bairro.ljust(40)} | {ativo}')
+        print(f'- {nome_rota.ljust(16)} | {bairro.ljust(40)} | {modalidade.ljust(20)} | {fornecedor.ljust(20)} | {ativo}')
  
     voltar_ao_menu_principal()
 
@@ -94,17 +138,18 @@ def alternar_estado_rota():
         if nome_rota == rota['nome']:
             rota_encontrada = True
             rota['ativo'] = not rota['ativo']
-            mensagem = f'A rota  {nome_rota} foi ativado com sucesso' if rota['ativo'] else f'a rota  {nome_rota} foi desativado com sucesso'
+            mensagem = f'A {nome_rota} foi ativado com sucesso' if rota['ativo'] else f'a rota {nome_rota} foi desativado com sucesso'
             print(mensagem)
 
     if not rota_encontrada:
         print('A rota não foi encontrado')
 
-    voltar_ao_menu_principal()
+    voltar_ao_menu_principal() 
+    
 
 def editar_rota():
 
-    ''' Essa função é responsável por editar qualquer rota e os seus bairros'''
+    ''' Essa função é responsável por editar qualquer rota e bairros'''
 
     exibir_subtitulo('Editando as rotas')
     nome_rota = input('Digite o nome da rota que deseja editar: ')
@@ -129,7 +174,7 @@ def editar_rota():
                 rota['bairro'] = novo_valor
                 print(f'Os Bairros de sua rota foram atualizados para: {novo_valor}')
                 print(rota)
-
+             
             else:
                 print('Campo inválido!')
 
