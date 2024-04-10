@@ -160,7 +160,9 @@ def editar_rota():
             rota_encontrada = True
             print(f'A sua rota tem esses campos {rota}\n')
             print('1. Editar Nome Rota')
-            print('2. Editar Bairros \n')
+            print('2. Editar Bairros')
+            print('3. Editar Modalidade')
+            print('2. Editar Fornecedor \n')
             editar = int(input('Escolha uma opção: '))
 
             if editar == 1:
@@ -173,6 +175,18 @@ def editar_rota():
                 novo_valor = input('Digite os novos Bairros: ')
                 rota['bairro'] = novo_valor
                 print(f'Os Bairros de sua rota foram atualizados para: {novo_valor}')
+                print(rota)
+
+            elif editar == 3:
+                novo_valor = input('Digite a nova modalidade: ')
+                rota['modalidade'] = novo_valor
+                print(f'A modalidade foi atualizada para: {novo_valor}')
+                print(rota)
+
+            elif editar == 4:
+                novo_valor = input('Digite o novo fornecedor: ')
+                rota['fornecedor'] = novo_valor
+                print(f'O fornecedor foi atualizada para: {novo_valor}')
                 print(rota)
              
             else:
