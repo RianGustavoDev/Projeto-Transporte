@@ -162,7 +162,7 @@ def editar_rota():
             print('1. Editar Nome Rota')
             print('2. Editar Bairros')
             print('3. Editar Modalidade')
-            print('2. Editar Fornecedor \n')
+            print('4. Editar Fornecedor \n')
             editar = int(input('Escolha uma opção: '))
 
             if editar == 1:
