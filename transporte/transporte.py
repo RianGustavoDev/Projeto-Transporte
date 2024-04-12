@@ -1,8 +1,8 @@
 import os
  
-rotas = [{'nome':'Rota 1', 'bairro':'Alvorada, Bairro da Paz, Redenção', 'modalidade':'W8', 'fornecedor':'Transsilvestre', 'ativo':False},
-         {'nome':'Rota 2', 'bairro':'Compensa, Nova Esperança, Planalto', 'modalidade':'V8', 'fornecedor':'Transsilvestre', 'ativo':True},
-         {'nome':'Rota 3', 'bairro':'Coroado, Mauazinho, Novo Aleixo', 'modalidade':'VAN', 'fornecedor':'Transsilvestre', 'ativo':False }]
+rotas = [{'nome':'Rota 1', 'bairro':'Alvorada, Bairro da Paz, Redenção', 'modalidade':'W8', 'fornecedor':'Transsilvestre', 'placa':'QZX8A02', 'ativo':False},
+         {'nome':'Rota 2', 'bairro':'Compensa, Nova Esperança, Planalto', 'modalidade':'V8', 'fornecedor':'Transsilvestre', 'placa':'QUV8B08', 'ativo':True},
+         {'nome':'Rota 3', 'bairro':'Coroado, Mauazinho, Novo Aleixo', 'modalidade':'VAN', 'fornecedor':'Transsilvestre', 'placa':'QAZ8C03', 'ativo':False }]
 
 
 def exibir_nome_do_programa():
@@ -84,6 +84,8 @@ def cadastrar_nova_rota():
     else:
         print('Item inválido!')
 
+    placa = input('Digite a placa do veículo: ')
+
     fornecedor = int(input('Digite o fornecedor do transporte: (1) ZENATUR, (2) TRANSSILVESTRE e (3) TRANSMEGA: '))
 
     if fornecedor == 1:
@@ -103,6 +105,7 @@ def cadastrar_nova_rota():
 
     rota['nome'] = nome_da_rota
     rota['bairro'] = bairro
+    rota['placa'] = placa
     rota['ativo'] = False
 
     rotas.append(rota)
@@ -115,14 +118,15 @@ def listar_rotas():
 
     ''' Essa função é para organizar as listas de rotas'''
 
-    print(f"{'Nome da rota'.ljust(18)} | {'Bairro'.ljust(40)} | {'Modalidade'.ljust(20)} | {'Fornecedor'.ljust(20)} | Status")
+    print(f"{'Nome da rota'.ljust(18)} | {'Bairro'.ljust(40)} | {'Modalidade'.ljust(14)} | {'Placa'.ljust(13)} | {'Fornecedor'.ljust(20)} | Status")
     for rota in rotas:
         nome_rota = rota['nome']
         bairro = rota['bairro']
         modalidade = rota['modalidade']
+        placa = rota['placa']
         fornecedor = rota['fornecedor']
         ativo = 'ativado' if rota['ativo'] else 'desativado'
-        print(f'- {nome_rota.ljust(16)} | {bairro.ljust(40)} | {modalidade.ljust(20)} | {fornecedor.ljust(20)} | {ativo}')
+        print(f'- {nome_rota.ljust(16)} | {bairro.ljust(40)} | {modalidade.ljust(14)} | {placa.ljust(13)} | {fornecedor.ljust(20)} | {ativo}')
  
     voltar_ao_menu_principal()
 
@@ -162,7 +166,8 @@ def editar_rota():
             print('1. Editar Nome Rota')
             print('2. Editar Bairros')
             print('3. Editar Modalidade')
-            print('4. Editar Fornecedor \n')
+            print('4. Editar Placa')
+            print('5. Editar Fornecedor \n')
             editar = int(input('Escolha uma opção: '))
 
             if editar == 1:
@@ -184,11 +189,17 @@ def editar_rota():
                 print(rota)
 
             elif editar == 4:
+                novo_valor = input('Digite a nova placa: ')
+                rota['placa'] = novo_valor
+                print(f'O a placa foi atualizada para: {novo_valor}')
+                print(rota)
+             
+            elif editar == 5:
                 novo_valor = input('Digite o novo fornecedor: ')
                 rota['fornecedor'] = novo_valor
                 print(f'O fornecedor foi atualizada para: {novo_valor}')
                 print(rota)
-             
+
             else:
                 print('Campo inválido!')
 
